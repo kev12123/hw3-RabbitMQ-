@@ -30,15 +30,10 @@ router.post('/listen',(req,res)=>{
 					ch.consume(q.queue, function(msg){
 
 						console.log(" [x] %s: %s`",msg.fields.routingKey, msg.content.toString());
-						res.json({msg: msg.content.toString()})
-						conn.close();
+						res.send({msg:msg.content.toString()});
 					},{noAck: true});
-
 				});
 			});
-
-
-
 		   
 		});
 
@@ -65,11 +60,9 @@ router.post('/speak',(req,res)=>{
 			console.log(" [X] Sent %s: '%s'",key,msg);
 
 		});
-
-		setTimeout(function() {conn.close(); res.send({status:"OK"})},500);
 	});
 
-	
+	res.status(200).send();
 
 });
 
