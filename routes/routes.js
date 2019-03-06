@@ -10,6 +10,7 @@ router.post('/listen',(req,res)=>{
 	var keys = req.body.keys;
 	console.log(keys);
 	var exchange = "HW3";
+	var resps = {"listen": []};
 
 		amqp.connect('amqp://test:test@130.245.170.206:5672/',(err,conn)=>{
 
@@ -29,10 +30,15 @@ router.post('/listen',(req,res)=>{
 					ch.consume(q.queue, function(msg){
 
 						console.log(" [x] %s: %s`",msg.fields.routingKey, msg.content.toString());
-						return res.status(200).send({msg:msg.content.toString()});
+						res.json({msg: msg.content.toString()})
+						conn.close();
 					},{noAck: true});
+
 				});
 			});
+
+
+
 		   
 		});
 
@@ -59,9 +65,11 @@ router.post('/speak',(req,res)=>{
 			console.log(" [X] Sent %s: '%s'",key,msg);
 
 		});
+
+		setTimeout(function() {conn.close(); res.send({status:"OK"})},500);
 	});
 
-	res.status(200).send();
+	
 
 });
 
