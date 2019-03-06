@@ -29,13 +29,14 @@ router.post('/listen',(req,res)=>{
 					ch.consume(q.queue, function(msg){
 
 						console.log(" [x] %s: %s`",msg.fields.routingKey, msg.content.toString());
+						return res.status(200).send({msg:msg.content.toString()});
 					},{noAck: true});
 				});
 			});
 		   
 		});
 
-	res.status(200).send();
+	
 });
 
 
