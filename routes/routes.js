@@ -34,6 +34,8 @@ router.post('/listen',(req,res)=>{
 			});
 		   
 		});
+
+	resp.status(2000).send();
 });
 
 
@@ -42,6 +44,8 @@ router.post('/speak',(req,res)=>{
 	//publish message to exchange HW3 with key provided { key:, msg: }
     var exchange = "HW3";
 	var {key,msg} = req.body;
+	console.log(key);
+	console.log(msg);
 
 	amqp.connect('amqp://test:test@130.245.170.206:5672/',(err,conn)=>{
 
@@ -56,6 +60,7 @@ router.post('/speak',(req,res)=>{
 		});
 	});
 
+	resp.status(200).send();
 
 });
 
