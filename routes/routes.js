@@ -15,7 +15,7 @@ router.post('/listen',(req,res)=>{
 
 			conn.createChannel((err,ch)=>{
 
-				ch.assertExchange(exchange,'direct',{durable: true});
+				ch.assertExchange(exchange,'direct',{durable: false});
 
 				ch.assertQueue('', {exclusive: true} , (err,q)=>{
 
@@ -51,7 +51,7 @@ router.post('/speak',(req,res)=>{
 
 		conn.createChannel((err,ch)=>{
 
-			ch.assertExchange(exchange,'direct',{durable: true});
+			ch.assertExchange(exchange,'direct',{durable: false});
 
 			ch.publish(exchange,key,Buffer.from(msg));
 
