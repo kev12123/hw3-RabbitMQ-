@@ -1,14 +1,13 @@
 const express = require('express'),
-	 app = express()
-	 amqp = require('amqplib/callback_api')
+	 app = express(),
+	 bodyParser = require('body-parser');
 	 PORT = process.env.PORT || 5000;
 
 
 
-
-
 //additional middleware
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/',require('./routes/routes'));
 
