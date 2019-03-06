@@ -35,7 +35,7 @@ router.post('/listen',(req,res)=>{
 		   
 		});
 
-	resp.status(2000).send();
+	res.status(2000).send();
 });
 
 
@@ -60,7 +60,7 @@ router.post('/speak',(req,res)=>{
 		});
 	});
 
-	resp.status(200).send();
+	res.status(200).send();
 
 });
 
